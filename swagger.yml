@@ -1,5 +1,5 @@
 openapi: 3.0.0
-info: 
+info:
   title: Reservation API
   description: API for Reservation service
   version: 0.0.1
@@ -19,33 +19,33 @@ paths:
               schema:
                 type: array
                 items:
-                    $ref: '#/components/schemas/Reservation'
+                  $ref: '#/components/schemas/Reservation'
     post:
       summary: Creates a Reservation
       requestBody:
-       content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Reservation'
-      responses: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
         '200':
           description: Successful creation of Reservation
           content:
             application/json:
               schema:
                 type: string
-        
+
   /{id}:
-    get: 
+    get:
       summary: Returns the reservation
-      parameters: 
+      parameters:
         - in: path
           name: id
           required: true
           schema:
             type: integer
           description: The Restaurant ID
-      responses: 
+      responses:
         '200':
           description: Successful Retrival of reservations
           content:
@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/Reservation'
     delete:
       summary: Deletes the reservation
-      parameters: 
+      parameters:
         - in: path
           name: id
           required: true
@@ -68,47 +68,45 @@ paths:
             application/json:
               schema:
                 type: string
-          
+
   /createMany:
-        post: 
-          summary: Creates multiple Reservations
-          responses: 
-            '200': 
-              description: Succesful operation
-              content:
-                application/json:
-                  schema:
-                    type: string
-  
+    post:
+      summary: Creates multiple Reservations
+      responses:
+        '200':
+          description: Succesful operation
+          content:
+            application/json:
+              schema:
+                type: string
+
   /deleteMany:
-    post: 
+    post:
       summary: Deletes multiple Reservations
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
-              schema: 
-                type: string
+              schema:
+                type: array
 components:
   schemas:
-    Reservation: 
+    Reservation:
       type: object
       properties:
-        restaurant: 
-          type: integer
+        restaurant:
+          type: string
           description: The Restaurant Name
-        name: 
+        name:
           type: string
           description: The name on the Reservations
-        timeSlot: 
+        timeSlot:
           type: string
           description: The time of the Reservation
-        guests: 
+        guests:
           type: integer
           description: The total number of guests, including children
-        children: 
+        children:
           type: integer
           description: The number of children in the Reservation
-        
-          
