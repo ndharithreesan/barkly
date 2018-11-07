@@ -12,7 +12,7 @@ mongorestore -h localhost:27017 ./data_dump
 ```
 
 3. Install npm dependencies
-   `npm install`
+   ```npm install```
 
 4. Start dev server
    `npm run dev`
@@ -20,16 +20,26 @@ mongorestore -h localhost:27017 ./data_dump
 ## cURL commands to access API
 
 - Get all reservations
-  `curl -X GET http://localhost:8000/`
+  ```
+  curl -X GET http://localhost:8000/
+  ```
 
 - Create a valid reservation
-  `curl -X POST http://localhost:8000/ -d "@examples/single_reservation_valid.json" -H "Content-Type: application/json"`
+  ```
+  curl -X POST http://localhost:8000/ -d "@examples/single_reservation_valid.json" -H "Content-Type: application/json"
+  ```
 
 - Create multiple valid reservations
-  `curl -X POST http://localhost:8000/createMany -d "@examples/multi_reservations_valid.json" -H "Content-Type: application/json"`
+  ```
+  curl -X POST http://localhost:8000/createMany -d "@examples/multi_reservations_valid.json" -H "Content-Type: application/json"
+  ```
 
 - Delete a reservation
-  `curl -X DELETE "http://localhost:8000/<ID>"`
+  ```
+  curl -X DELETE "http://localhost:8000/<ID>"
+  ```
 
 - Delete multiple reservations
-  `curl -X DELETE "http://localhost:8000/deleteMany/[<ID_1>...<ID_N>]"`
+  ```
+  curl -X DELETE "http://localhost:8000/deleteMany/[<ID_1>...<ID_N>]"
+  ```
