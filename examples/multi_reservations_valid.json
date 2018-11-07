@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Nimi",
+    "restaurant": "Barker Burger",
+    "timeSlot": "2018-11-24T14:00:00.000Z",
+    "guests": 1,
+    "children": 0
+  },
+  {
+    "name": "Garrett",
+    "restaurant": "Meow Meow Macaroni Co.",
+    "timeSlot": "2018-11-24T16:00:00.000Z",
+    "guests": 1,
+    "children": 0
+  }
+]

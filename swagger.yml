@@ -19,22 +19,21 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Reservation'
+                  $ref: '#/components/schemas/ReservationModel'
     post:
       summary: Creates a Reservation
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reservation'
+              $ref: '#/components/schemas/ReservationRequest'
       responses:
         '200':
           description: Successful creation of Reservation
           content:
             application/json:
               schema:
-                type: string
-
+                $ref: '#/components/schemas/ReservationModel'
   /{id}:
     get:
       summary: Returns the reservation
@@ -43,15 +42,15 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
-          description: The Restaurant ID
+            type: string
+          description: The Reservation ID
       responses:
         '200':
-          description: Successful Retrival of reservations
+          description: Successful Retrival of reservation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: '#/components/schemas/ReservationModel'
     delete:
       summary: Deletes the reservation
       parameters:
@@ -59,10 +58,10 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
-          description: The Restaurant ID
+            type: string
+          description: The Reservation ID
       responses:
-        '200':
+        '204':
           description: Sucessful reception of delete request
           content:
             application/json:
@@ -72,29 +71,74 @@ paths:
   /createMany:
     post:
       summary: Creates multiple Reservations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ReservationRequest'
       responses:
-        '200':
+        '201':
           description: Succesful operation
+        '400':
+          description: Invalid input
           content:
             application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                  invalid:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReservationRequest'
+                    description: The reservations that failed validation
 
-  /deleteMany:
+  /deleteMany/{ids}:
     post:
       summary: Deletes multiple Reservations
+      parameters:
+        - in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              description: The reservation ID
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
+        '204':
+          description: Successful reception of delete request
 components:
   schemas:
-    Reservation:
+    ReservationRequest:
       type: object
       properties:
+        restaurant:
+          type: string
+          description: The Restaurant Name
+        name:
+          type: string
+          description: The name on the Reservations
+        timeSlot:
+          type: string
+          description: The time of the Reservation
+        guests:
+          type: integer
+          description: The total number of guests, including children
+        children:
+          type: integer
+          description: The number of children in the Reservation
+
+    ReservationModel:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The Reservation ID
         restaurant:
           type: string
           description: The Restaurant Name
